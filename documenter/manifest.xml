@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Plugin PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Plugin certificationLevel="None"
+        name="MCDocumenterPlugin"
+        displayName="MC Documenter Plugin"
+        minSystemVersion="7.2"
+        maxSystemVersion="8.4"
+        version="1.0.0">
+    <Attributes>
+      <Map>
+        <entry key="minUpgradableVersion" value="1.0.0"/>
+        <entry key="taskExecutors">
+          <value>
+            <List>
+              <String>sailpoint.mcdocumenter.task.Documenter</String>
+              <String>sailpoint.mcdocumenter.task.RoleAnalysis</String>
+            </List>
+          </value>
+        </entry>
+      </Map>
+    </Attributes>
+</Plugin>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TaskDefinition PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskDefinition executor="sailpoint.mcdocumenter.task.RoleAnalysis" name="MCPlugin Role Analysis" progressInterval="5000" progressMode="String" resultAction="Rename" subType="task_item_type_generic" template="true" type="Generic">
+  <Description>Output role analysis.</Description>
+  <Attributes>
+    <Map>
+      <entry key="pluginName" value="MCDocumenterPlugin"/>
+      <entry key="mailTemplate" value="Default Report Template"/>
+    </Map>
+  </Attributes>
+  <Signature>
+    <Inputs>
+      <Argument helpKey="Top level bundle to analyze" name="topLevelBundle" multi="false" required="false" type="Bundle">
+        <Prompt>Top Level Bundle</Prompt>
+      </Argument>
+      <Argument helpKey="topdown or bottomup" name="analysisProcess" required="false" type="string">
+        <Prompt>Analysis Process</Prompt>
+      </Argument>
+      <Argument helpKey="Path to the directory where the data should be written." name="basePath" required="true" type="string">
+        <Prompt>Base path for output</Prompt>
+      </Argument>
+      <Argument helpKey="Filename of the output file." name="fileName" required="false" type="string">
+        <Prompt>Output filename</Prompt>
+      </Argument>
+      <Argument helpKey="Email address to send file to as attachment." name="mailTo" required="false" type="string">
+        <Prompt>Mail output to</Prompt>
+      </Argument>
+      <Argument helpKey="Email template to send report with." name="mailTemplate" required="false" type="string">
+        <Prompt>Email Template</Prompt>
+      </Argument>
+    </Inputs>
+    <Returns>
+      <Argument name="resultString" type="string">
+        <Prompt>Results</Prompt>
+      </Argument>
+    </Returns>
+  </Signature>
+</TaskDefinition>
