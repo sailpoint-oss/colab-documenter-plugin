@@ -54,6 +54,9 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 import org.apache.poi.ss.util.*;
 
+// Word imports
+import org.apache.poi.xwpf.usermodel.*;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -84,6 +87,15 @@ public class Documenter extends BasePluginTaskExecutor {
   private String outputFilename="";
   private String _ignoreApps=null;
   private Map<String,Map<String,Integer>> appOrdinals=new HashMap<String,Map<String,Integer>>();
+  /*
+   * Included to create the application component design documents
+   */
+  private boolean successfulDocWrite=false;
+  private Boolean documentApplications=false;
+  private String docAppsStr="";
+  private List<String> docAppsList=new ArrayList<String>();
+  private String componentFilenameStr="";
+  // End of changes for component design docs
   @SuppressWarnings({"rawtypes","unchecked"})
   @Override
   public void execute(SailPointContext context, TaskSchedule schedule,
@@ -199,6 +211,23 @@ public class Documenter extends BasePluginTaskExecutor {
       _mailTemplate=args.getString("mailTemplate");
       log.debug("DOC-005 read mailTemplate of "+_mailTemplate);
     }
+    /*
+     * Included to create the application component design documents
+     */
+    documentApplications=args.getBoolean("documentApplications");
+    if(documentIdentityAttributes.booleanValue()) {
+      if(args.containsKey("docApps")) {
+        docAppsStr=args.getString("docApps");
+        if(docAppsStr.contains(",")) {
+          String[] appsArray=docAppsStr.split(",");
+          docAppsList.addAll(Arrays.asList(appsArray));
+        }
+      }
+      else {
+        docAppsList.add(docAppsStr);
+      }
+    }
+    
     /*
      * System Configuration
      */
@@ -826,6 +855,43 @@ public class Documenter extends BasePluginTaskExecutor {
             fileOut.flush();
             fileOut.close();
             successfulFileWrite=true;
+            sboutput.append("\nSuccessfully wrote output file");
+          }
+          catch (Exception gex) {
+            log.error("DOC-199 "+gex.getClass().getName()+":"+gex.getMessage());
+            sboutput.append("\nError: "+gex.getClass().getName()+":"+gex.getMessage());
+          }
+        }
+      }
+    }
+    if(documentApplications) {
+      XWPFDocument wdoc=null;
+      OutputStream fout=null;
+      String wordFilenameStr="wordtest.docx";
+      try {
+        wdoc=new XWPFDocument();
+        XWPFParagraph ptitle=wdoc.createParagraph();
+        ptitle.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun rtitle=ptitle.createRun();
+        rtitle.setBold(true);
+        rtitle.setItalic(false);
+        rtitle.setFontSize(36);
+        rtitle.setFontFamily("Arial");
+        rtitle.setText("Client Name");
+        
+        fout = new FileOutputStream(wordFilenameStr);
+      }
+      catch (Exception ex) {
+        log.error("DOC-199 "+ex.getClass().getName()+":"+ex.getMessage());
+        sboutput.append("\nError: "+ex.getClass().getName()+":"+ex.getMessage());
+      }
+      finally {
+        if(fout!=null) {
+          try {
+            wdoc.write(fout);
+            fout.flush();
+            fout.close();
+            successfulDocWrite=true;
             sboutput.append("\nSuccessfully wrote output file");
           }
           catch (Exception gex) {

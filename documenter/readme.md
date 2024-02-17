@@ -14,3 +14,7 @@ It also includes a role analysis task that is used to list roles in order of hie
 When the role analysis is used in bottomup mode, it can be edited into a script to delete roles
 in the IdentityIQ Console.
 
+## Version History
+
+1.0.1 - Added the Application Component design documentation
+

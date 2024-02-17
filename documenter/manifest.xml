@@ -5,7 +5,7 @@
         displayName="MC Documenter Plugin"
         minSystemVersion="7.2"
         maxSystemVersion="8.4"
-        version="1.0.0">
+        version="1.0.1">
     <Attributes>
       <Map>
         <entry key="minUpgradableVersion" value="1.0.0"/>

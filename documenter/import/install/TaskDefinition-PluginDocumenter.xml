@@ -16,6 +16,12 @@
       <Argument helpKey="Comma separated list of applications to ignore in the identity attributes analysis." name="ignoreApps" required="false" type="string">
         <Prompt>Apps to Ignore</Prompt>
       </Argument>
+      <Argument helpKey="Document the Applications" name="documentApplications" required="false" type="boolean">
+        <Prompt>Document Applications</Prompt>
+      </Argument>
+      <Argument helpKey="Comma separated list of applications to document." name="docApps" required="false" type="string">
+        <Prompt>Apps to Document</Prompt>
+      </Argument>
       <Argument helpKey="Path to the directory where the data should be written." name="basePath" required="true" type="string">
         <Prompt>Base path for output</Prompt>
       </Argument>
