@@ -14,3 +14,5 @@ It also includes a role analysis task that is used to list roles in order of hie
 When the role analysis is used in bottomup mode, it can be edited into a script to delete roles
 in the IdentityIQ Console.
 
+New functionality added March 2024: A task to upload sheets from a spreadsheet into Custom objects.
+
