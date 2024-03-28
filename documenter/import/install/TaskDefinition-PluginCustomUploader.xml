@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TaskDefinition PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskDefinition executor="sailpoint.mcdocumenter.task.CustomUploader" name="MCPlugin Custom Uploader" progressInterval="5000" progressMode="String" resultAction="Rename" subType="task_item_type_generic" template="true" type="Generic">
+  <Description>Upload spreadsheet to Custom objects.</Description>
+  <Attributes>
+    <Map>
+      <entry key="pluginName" value="MCDocumenterPlugin"/>
+    </Map>
+  </Attributes>
+  <Signature>
+    <Inputs>
+      <Argument helpKey="Path to the Spreadsheet" name="basePath" multi="false" required="true" type="string">
+        <Prompt>File Path</Prompt>
+      </Argument>
+      <Argument helpKey="Name of the Spreadsheet" name="fileName" required="false" type="string">
+        <Prompt>File Name</Prompt>
+      </Argument>
+      <Argument helpKey="Custom object containing Sheet to Custom mapping" name="mappingObj" required="false" type="string">
+        <Prompt>Mapping Object</Prompt>
+      </Argument>
+      <Argument helpKey="Number of lines to skip or mapping object name" name="headerSize" required="false" type="string">
+        <Prompt>Header size</Prompt>
+      </Argument>
+      <Argument helpKey="Delete data before adding or add new object if not found" name="fullOverwrite" required="false" type="boolean">
+        <Prompt>Delete old map data</Prompt>
+      </Argument>
+      <Argument helpKey="Should I delete the spreadsheet when done?" name="postDelete" required="false" type="boolean">
+        <Prompt>Delete on Read</Prompt>
+      </Argument>
+    </Inputs>
+    <Returns>
+      <Argument name="resultString" type="string">
+        <Prompt>Results</Prompt>
+      </Argument>
+    </Returns>
+  </Signature>
+</TaskDefinition>

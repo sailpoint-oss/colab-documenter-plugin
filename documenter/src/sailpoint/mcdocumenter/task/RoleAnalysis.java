@@ -37,17 +37,18 @@ public class RoleAnalysis extends BasePluginTaskExecutor {
   private String sailpointPatch="";
   private StringBuffer sbfile=new StringBuffer();
   private StringBuffer sboutput=new StringBuffer();
-  private TaskResult taskResult;
   private String _basePath=null;
   private String _fileName=null;
   private String _mailTo=null;
   private String _mailTemplate="Default Report Template";
   private boolean unixOrigin=false;
   private boolean showHierarchy=false;
+  private TaskResult taskResult=null;
   @SuppressWarnings({"rawtypes","unchecked"})
   @Override
   public void execute(SailPointContext context, TaskSchedule schedule,
     TaskResult result, Attributes args) throws Exception {
+    taskResult=result;
     DateFormat sdfout=new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     DateFormat sdfnotime=new SimpleDateFormat("MM/dd/yyyy");
     Date now=new Date();
@@ -266,9 +267,9 @@ public class RoleAnalysis extends BasePluginTaskExecutor {
       }
       proceed=false;
     }
-    result.setAttribute("resultString", sboutput.toString());
-    result.setCompletionStatus(TaskResult.CompletionStatus.Success);
-    result.addMessage(new Message(Message.Type.Info,"Processed"));
+    taskResult.setAttribute("taskResultString", sboutput.toString());
+    taskResult.setCompletionStatus(TaskResult.CompletionStatus.Success);
+    taskResult.addMessage(new Message(Message.Type.Info,"Processed"));
     log.debug("RAT-012 exiting");
     return;
   }
